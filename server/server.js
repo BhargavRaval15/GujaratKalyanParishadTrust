@@ -7,6 +7,9 @@ const app=express();
 app.use(cors());
 app.use(express.json());
 
+const trustRoutes=require('./routes/trustRoutes');
+app.use('/api',trustRoutes);
+
 app.get('/',(req,res)=>{
     res.send('Gujarat Kalyan Parishad API running!');
 });
