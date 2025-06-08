@@ -19,7 +19,7 @@ export default function News(){
                         <p>{item.description}</p>
                     </div>
                 ))}
-            </div>
+            </div>  
 
         </div>
     );
