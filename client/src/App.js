@@ -7,6 +7,10 @@ import Events from "./pages/Events";
 import Donate from "./pages/Donate";
 import Contact from "./pages/Contact";
 import Home from "./pages/Home";
+import AdminLogin from "./pages/AdminLogin";
+import AdminDashboard from "./pages/AdminDashboard";
+import AdminRegister from "./pages/AdminRegister";
+import EventDetail from "./pages/EventDetail";
 
 function App() {
   return (
@@ -17,9 +21,13 @@ function App() {
           <Routes>
             <Route path="/news" element={<News />} />
             <Route path="/about" element={<About />} />
+            <Route path="/events/:id" element={<EventDetail />} />
             <Route path="/events" element={<Events />} />
             <Route path="/donate" element={<Donate />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin/dashboard" element={<AdminDashboard />} />
+            <Route path="/admin/register" element={<AdminRegister />} />
             <Route path="/" element={<Home />} />
           </Routes>
         </main>

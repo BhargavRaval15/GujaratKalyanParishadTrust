@@ -12,6 +12,8 @@ export default function Navbar() {
           <Link to="/news">News</Link>
           <Link to="/donate">Donate</Link>
           <Link to="/contact">Contact</Link>
+          <Link to="/admin/login" className="hover:underline">Admin</Link>
+
         </div>
       </div>
     </nav>

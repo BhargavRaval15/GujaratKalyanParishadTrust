@@ -1,21 +1,18 @@
-const express=require('express');
-const router=express.Router();
-const News=require("../models/News");
+const express = require("express");
+const router = express.Router();
+const Event = require("../models/Event");
 
-router.get('/news',async(req,res)=>{
-    const news=await News.find().sort({date:-1});
-    res.json(news);
+router.get("/events", async (req, res) => {
+  const events = await Event.find();
+  res.json(events);
+});
+router.get("/events/:id", async (req, res) => {
+  try {
+    const event = await Event.findById(req.params.id);
+    res.json(event);
+  } catch {
+    res.status(404).json({ message: "Event not found" });
+  }
 });
 
-router.post('/news',async(req,res)=>{
-    const {title,image,description}=req.body;
-    try{
-        const newNews=new News({title,image,description});
-        await newNews.save();
-        res.status(201).json(newNews);
-    }catch(err){
-        res.status(400).json({error:err.message});
-    }
-});
-
-module.exports=router;
+module.exports = router;
