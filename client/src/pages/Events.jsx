@@ -6,10 +6,13 @@ function Events() {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    axios.get("/api/events")
-      .then(res => setEvents(res.data))
-      .catch(err => console.error("Failed to fetch events", err));
-  }, []);
+  axios.get("/api/events")
+    .then(res => {
+      console.log("Events data:", res.data); // Add this
+      setEvents(res.data);
+    })
+    .catch(err => console.error("Failed to fetch events", err));
+}, []);
 
   return (
     <div className="p-6 max-w-6xl mx-auto">
@@ -22,7 +25,7 @@ function Events() {
             className="bg-white shadow rounded p-4 hover:shadow-lg transition block"
           >
             <img
-              src={`${process.env.REACT_APP_API_BASE_URL}${event.image}`} // ✅ Always correct image path
+               src={`${process.env.REACT_APP_API_BASE_URL}${event.image}`}  // ✅ Always correct image path
               alt={event.title}
               className="h-48 w-full object-cover rounded"
               onError={(e) => (e.target.style.display = "none")} // optional fallback
