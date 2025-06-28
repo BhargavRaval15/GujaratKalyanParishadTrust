@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom"; // ✅ Import Link
-import { loginAdmin } from "../api/admin";
+import { useNavigate } from "react-router-dom";
 
 export default function AdminLogin() {
   const [form, setForm] = useState({ username: "", password: "" });
@@ -12,11 +11,16 @@ export default function AdminLogin() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const { token } = await loginAdmin(form);
-      localStorage.setItem("adminToken", token);
+    
+    // Check for static credentials
+    if (form.username === "gkpofficial" && form.password === "gkprss") {
+      // For a static admin, we can use a simpler approach
+      // Just set a flag in localStorage that indicates the user is logged in
+      localStorage.setItem("adminToken", "static-admin-token");
+      
+      // Navigate to dashboard
       navigate("/admin/dashboard");
-    } catch {
+    } else {
       setError("Login failed. Please check credentials.");
     }
   };
@@ -43,14 +47,6 @@ export default function AdminLogin() {
           Login
         </button>
       </form>
-
-      {/* ✅ Register Link */}
-      <p className="text-sm mt-4 text-center">
-        New admin?{" "}
-        <Link to="/admin/register" className="text-orange-600 underline">
-          Register here
-        </Link>
-      </p>
     </div>
   );
 }
