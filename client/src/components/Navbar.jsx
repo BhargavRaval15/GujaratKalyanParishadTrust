@@ -28,7 +28,7 @@ export default function Navbar() {
     { path: "/news", label: "News" },
     { path: "/donate", label: "Donate" },
     { path: "/contact", label: "Contact" },
-    { path: "/admin/login", label: "Admin" }
+    // { path: "/admin/login", label: "Admin" }
   ];
 
   return (
