@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const Admin = require("../models/Admin");
 const Event = require("../models/Event");
+const News = require("../models/News");
 const upload = require("../middleware/upload");
 
 // ✅ Auth Middleware
@@ -68,18 +69,115 @@ router.post("/login", async (req, res) => {
 });
 
 // ✅ Protected route (Add Event)
-router.post("/add-event", auth, upload.single("image"), async (req, res) => {
+router.post("/add-event", auth, upload.array("images", 10), async (req, res) => {
   try {
     const { title, date, description } = req.body;
-    const image = req.file ? `/uploads/${req.file.filename}` : "";
+    const images = req.files ? req.files.map(file => `/uploads/${file.filename}`) : [];
 
-    const newEvent = new Event({ title, image, date, description });
+    const newEvent = new Event({ 
+      title, 
+      images, 
+      date, 
+      description 
+    });
     await newEvent.save();
 
-    res.status(201).json({ message: "Event added successfully" });
+    res.status(201).json({ message: "Event added successfully", event: newEvent });
   } catch (err) {
     console.error("Add Event Error:", err.message);
     res.status(500).json({ message: "Failed to add event" });
+  }
+});
+
+// ✅ Protected route (Delete Event)
+router.delete("/events/:id", auth, async (req, res) => {
+  try {
+    const deletedEvent = await Event.findByIdAndDelete(req.params.id);
+    
+    if (!deletedEvent) {
+      return res.status(404).json({ message: "Event not found" });
+    }
+
+    res.json({ message: "Event deleted successfully" });
+  } catch (err) {
+    console.error("Delete Event Error:", err.message);
+    res.status(500).json({ message: "Failed to delete event" });
+  }
+});
+
+// ✅ Protected route (Add News)
+router.post("/add-news", auth, upload.array("images", 10), async (req, res) => {
+  try {
+    const { title, description, source, category } = req.body;
+    const images = req.files ? req.files.map(file => `/uploads/${file.filename}`) : [];
+
+    const newNews = new News({ 
+      title, 
+      images, 
+      description, 
+      source, 
+      category 
+    });
+    await newNews.save();
+
+    res.status(201).json({ message: "News added successfully", news: newNews });
+  } catch (err) {
+    console.error("Add News Error:", err.message);
+    res.status(500).json({ message: "Failed to add news" });
+  }
+});
+
+// ✅ Protected route (Get All News for Admin)
+router.get("/news", auth, async (req, res) => {
+  try {
+    const news = await News.find().sort({ date: -1 });
+    res.json(news);
+  } catch (err) {
+    console.error("Get News Error:", err.message);
+    res.status(500).json({ message: "Failed to fetch news" });
+  }
+});
+
+// ✅ Protected route (Update News)
+router.put("/news/:id", auth, upload.array("images", 10), async (req, res) => {
+  try {
+    const { title, description, source, category } = req.body;
+    const updateData = { title, description, source, category };
+    
+    if (req.files && req.files.length > 0) {
+      updateData.images = req.files.map(file => `/uploads/${file.filename}`);
+    }
+
+    const updatedNews = await News.findByIdAndUpdate(
+      req.params.id, 
+      updateData, 
+      { new: true }
+    );
+
+    if (!updatedNews) {
+      return res.status(404).json({ message: "News not found" });
+    }
+
+    res.json({ message: "News updated successfully", news: updatedNews });
+  } catch (err) {
+    console.error("Update News Error:", err.message);
+    res.status(500).json({ message: "Failed to update news" });
+  }
+});
+
+// ✅ Protected route (Delete News)
+router.delete("/news/:id", auth, async (req, res) => {
+  try {
+    const deletedNews = await News.findByIdAndDelete(req.params.id);
+    
+    if (!deletedNews) {
+      return res.status(404).json({ message: "News not found" });
+    }
+
+    res.json({ message: "News deleted successfully" });
+  } catch (err) {
+    console.error("Delete News Error:", err.message);
+    res.status(500).json({ message: "Failed to delete news" });
   }
 });
 

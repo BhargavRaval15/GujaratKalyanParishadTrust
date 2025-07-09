@@ -1,3 +1,279 @@
+/* index.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  font-family: 'Inter', 'Poppins', sans-serif;
+  scroll-behavior: smooth;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #ff6b35, #f7931e);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #e55a2b, #e8851a);
+}
+
+/* Custom animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(255, 107, 53, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(255, 107, 53, 0.6); }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+}
+
+.shimmer-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-effect::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  animation: shimmer 2s infinite;
+}
+
+/* Glass morphism effect */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.glass-dark {
+  background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Gradient backgrounds */
+.gradient-orange {
+  background: linear-gradient(135deg, #ff6b35, #f7931e, #ffaa44);
+}
+
+.gradient-blue {
+  background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+}
+
+.gradient-green {
+  background: linear-gradient(135deg, #4facfe, #00f2fe, #43e97b);
+}
+
+.gradient-purple {
+  background: linear-gradient(135deg, #a8edea, #fed6e3, #d299c2);
+}
+
+/* Text gradients */
+.text-gradient-orange {
+  background: linear-gradient(135deg, #ff6b35, #f7931e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-blue {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Hover effects */
+.hover-lift {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Button styles */
+.btn-primary {
+  @apply px-8 py-4 rounded-full font-semibold text-white transition-all duration-300 transform hover:scale-105 hover:shadow-lg;
+  background: linear-gradient(135deg, #ff6b35, #f7931e);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #e55a2b, #e8851a);
+  box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
+}
+
+.btn-secondary {
+  @apply px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: #333;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Card styles */
+.card-modern {
+  @apply rounded-3xl p-8 transition-all duration-500 hover-lift;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.card-modern:hover {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(255, 107, 53, 0.3);
+}
+
+/* Loading animations */
+.loading-dots {
+  display: inline-block;
+}
+
+.loading-dots::after {
+  content: '';
+  animation: loading-dots 1.5s infinite;
+}
+
+@keyframes loading-dots {
+  0%, 20% { content: ''; }
+  40% { content: '.'; }
+  60% { content: '..'; }
+  80%, 100% { content: '...'; }
+}
+
+/* Text utilities */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Responsive utilities */
+@media (max-width: 640px) {
+  .text-responsive {
+    font-size: clamp(1rem, 4vw, 1.5rem);
+  }
+  
+  .heading-responsive {
+    font-size: clamp(1.5rem, 6vw, 3rem);
+  }
+  
+  /* Mobile-specific adjustments */
+  .card-modern {
+    @apply p-4 rounded-2xl;
+  }
+  
+  .btn-primary, .btn-secondary {
+    @apply px-6 py-3 text-sm;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  /* Tablet-specific adjustments */
+  .card-modern {
+    @apply p-6 rounded-2xl;
+  }
+}
+
+@media (min-width: 1025px) {
+  /* Desktop-specific adjustments */
+  .card-modern {
+    @apply p-8 rounded-3xl;
+  }
+}
+
+/* Container responsive padding */
+.container-responsive {
+  @apply px-4 sm:px-6 lg:px-8;
+}
+
+/* Responsive text sizes */
+.text-xs-responsive { @apply text-xs sm:text-sm; }
+.text-sm-responsive { @apply text-sm sm:text-base; }
+.text-base-responsive { @apply text-base sm:text-lg; }
+.text-lg-responsive { @apply text-lg sm:text-xl; }
+.text-xl-responsive { @apply text-xl sm:text-2xl; }
+.text-2xl-responsive { @apply text-2xl sm:text-3xl; }
+.text-3xl-responsive { @apply text-3xl sm:text-4xl; }
+.text-4xl-responsive { @apply text-4xl sm:text-5xl; }
+
+/* Responsive spacing */
+.py-responsive { @apply py-8 sm:py-12 lg:py-16; }
+.px-responsive { @apply px-4 sm:px-6 lg:px-8; }
+.mb-responsive { @apply mb-4 sm:mb-6 lg:mb-8; }
+.mt-responsive { @apply mt-4 sm:mt-6 lg:mt-8; }
+
+/* Responsive grid gaps */
+.gap-responsive { @apply gap-4 sm:gap-6 lg:gap-8; }
+
+/* Hide/show elements based on screen size */
+.mobile-only { @apply block sm:hidden; }
+.tablet-up { @apply hidden sm:block; }
+.desktop-only { @apply hidden lg:block; }
+

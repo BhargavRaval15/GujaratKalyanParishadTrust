@@ -59,13 +59,14 @@ export default function EventDetail() {
         transition={{ duration: 0.7 }}
         className="bg-white rounded-lg shadow-lg overflow-hidden"
       >
+        {/* Main Image Display */}
         <div className="relative">
           <img
-            src={event.image ? `${process.env.REACT_APP_API_BASE_URL}${event.image}` : 'https://via.placeholder.com/800x400?text=Event+Image+Not+Available'}
+            src={event.images && event.images.length > 0 ? `${process.env.REACT_APP_API_BASE_URL}${event.images[0]}` : 'https://via.placeholder.com/800x400?text=Event+Image+Not+Available'}
             alt={event.title}
-            className="w-full h-[200px] sm:h-[300px] md:h-[400px] object-cover transition duration-300 ease-in-out"
+            className="main-event-image w-full h-[200px] sm:h-[300px] md:h-[400px] object-cover transition duration-300 ease-in-out"
             onError={(e) => {
-              console.error("Image failed to load:", `${process.env.REACT_APP_API_BASE_URL}${event.image}`);
+              console.error("Image failed to load:", event.images && event.images.length > 0 ? `${process.env.REACT_APP_API_BASE_URL}${event.images[0]}` : 'No image available');
               e.target.onerror = null;
               e.target.src = 'https://via.placeholder.com/800x400?text=Event+Image+Not+Available';
             }}
@@ -74,6 +75,35 @@ export default function EventDetail() {
             {event.date}
           </div>
         </div>
+
+        {/* Additional Images Gallery */}
+        {event.images && event.images.length > 1 && (
+          <div className="p-4 sm:p-6 border-b">
+            <h3 className="text-lg font-semibold text-gray-800 mb-3">Event Gallery</h3>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3">
+              {event.images.slice(1).map((image, index) => (
+                <div key={index} className="relative overflow-hidden rounded-lg">
+                  <img
+                    src={`${process.env.REACT_APP_API_BASE_URL}${image}`}
+                    alt={`${event.title} - Image ${index + 2}`}
+                    className="w-full h-20 sm:h-24 md:h-28 object-cover hover:scale-105 transition-transform duration-300 cursor-pointer"
+                    onError={(e) => {
+                      console.error("Gallery image failed to load:", `${process.env.REACT_APP_API_BASE_URL}${image}`);
+                      e.target.style.display = 'none';
+                    }}
+                    onClick={(e) => {
+                      // Replace main image with clicked gallery image
+                      const mainImg = document.querySelector('.main-event-image');
+                      if (mainImg) {
+                        mainImg.src = e.target.src;
+                      }
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         <div className="p-4 sm:p-6 md:p-8">
           <motion.h1 

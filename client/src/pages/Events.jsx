@@ -106,11 +106,11 @@ function Events() {
               >
                 <div className="relative overflow-hidden">
                   <img
-                    src={event.image ? `${process.env.REACT_APP_API_BASE_URL}${event.image}` : 'https://via.placeholder.com/800x400?text=Event+Image+Not+Available'}
+                    src={event.images && event.images.length > 0 ? `${process.env.REACT_APP_API_BASE_URL}${event.images[0]}` : 'https://via.placeholder.com/800x400?text=Event+Image+Not+Available'}
                     alt={event.title}
                     className="h-40 sm:h-48 md:h-52 w-full object-cover transition-transform duration-500 hover:scale-105"
                     onError={(e) => {
-                      console.error("Image failed to load:", `${process.env.REACT_APP_API_BASE_URL}${event.image}`);
+                      console.error("Image failed to load:", event.images && event.images.length > 0 ? `${process.env.REACT_APP_API_BASE_URL}${event.images[0]}` : 'No image available');
                       e.target.onerror = null;
                       e.target.src = 'https://via.placeholder.com/800x400?text=Event+Image+Not+Available';
                     }}

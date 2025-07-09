@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "../api/axios";
 
 export default function AdminLogin() {
   const [form, setForm] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) =>
@@ -11,17 +13,26 @@ export default function AdminLogin() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setError("");
     
-    // Check for static credentials
-    if (form.username === "gkpofficial" && form.password === "gkprss") {
-      // For a static admin, we can use a simpler approach
-      // Just set a flag in localStorage that indicates the user is logged in
-      localStorage.setItem("adminToken", "static-admin-token");
+    try {
+      const response = await axios.post("/api/admin/login", {
+        username: form.username,
+        password: form.password,
+      });
+
+      // Store the token
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("adminToken", response.data.token);
       
       // Navigate to dashboard
       navigate("/admin/dashboard");
-    } else {
-      setError("Login failed. Please check credentials.");
+    } catch (err) {
+      console.error("Login error:", err);
+      setError(err.response?.data?.message || "Login failed. Please check credentials.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -43,8 +54,12 @@ export default function AdminLogin() {
           placeholder="Password"
           className="w-full p-2 border rounded"
         />
-        <button className="w-full bg-orange-600 text-white p-2 rounded hover:bg-orange-700">
-          Login
+        <button 
+          type="submit"
+          disabled={loading}
+          className="w-full bg-orange-600 text-white p-2 rounded hover:bg-orange-700 disabled:bg-orange-400"
+        >
+          {loading ? "Logging in..." : "Login"}
         </button>
       </form>
     </div>
