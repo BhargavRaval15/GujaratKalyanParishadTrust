@@ -150,8 +150,6 @@ export default function Home() {
           
           {/* Decorative elements */}
           <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
             className="absolute -top-1 -right-1 lg:-top-2 lg:-right-2 w-6 h-6 lg:w-8 lg:h-8 bg-orange-500 rounded-full flex items-center justify-center shadow-lg"
           >
             <span className="text-white text-xs">🕉️</span>
@@ -294,7 +292,7 @@ export default function Home() {
             className="text-center mb-8 sm:mb-10 lg:mb-12"
           >
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gradient-orange mb-4 sm:mb-6">
-              📢 Important Announcement
+              Serving Society with Values
             </h2>
             <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto px-4">
               Stay informed about our latest initiatives and community programs
@@ -325,22 +323,7 @@ export default function Home() {
                 </div>
               </motion.div>
               
-              {/* Decorative elements */}
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className="absolute -top-3 -right-3 sm:-top-4 sm:-right-4 lg:-top-6 lg:-right-6 w-10 h-10 sm:w-12 sm:h-12 lg:w-16 lg:h-16 gradient-orange rounded-full flex items-center justify-center shadow-lg"
-              >
-                <span className="text-lg sm:text-xl lg:text-2xl">📢</span>
-              </motion.div>
               
-              <motion.div
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 3, repeat: Infinity }}
-                className="absolute -bottom-2 -left-2 sm:-bottom-3 sm:-left-3 lg:-bottom-4 lg:-left-4 w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-white rounded-full flex items-center justify-center shadow-lg"
-              >
-                <span className="text-sm sm:text-base lg:text-xl">⭐</span>
-              </motion.div>
             </div>
           </motion.div>
 
@@ -353,7 +336,7 @@ export default function Home() {
             className="text-center mt-8 sm:mt-10 lg:mt-12"
           >
             <p className="text-sm sm:text-base lg:text-lg text-gray-700 mb-4 sm:mb-6">
-              📱 Share this important message with your community
+              📱 Share this information with your community
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
               <button 

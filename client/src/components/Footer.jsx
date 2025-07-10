@@ -46,9 +46,9 @@ export default function Footer() {
               className="sm:col-span-2 lg:col-span-1"
             >
               <div className="flex items-center space-x-2 sm:space-x-3 mb-3 sm:mb-4">
-                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white flex items-center justify-center animate-pulse-glow">
+                {/* <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white flex items-center justify-center animate-pulse-glow">
                   <span className="text-lg sm:text-xl">🕉️</span>
-                </div>
+                </div> */}
                 <div>
                   <h3 className="text-base sm:text-lg font-bold text-white">Gujarat Kalyan Parishad</h3>
                   <p className="text-orange-100 text-xs">Serving Society with Values</p>
@@ -67,7 +67,7 @@ export default function Footer() {
                 </div>
                 <div className="flex items-center space-x-2 sm:space-x-3 text-orange-100">
                   <span className="text-base sm:text-lg">✉️</span>
-                  <span className="text-xs sm:text-sm break-all">info@gujaratkalyanparishad.org</span>
+                  <span className="text-xs sm:text-sm break-all">gujratkp1975@gmail.com</span>
                 </div>
               </div>
             </motion.div>

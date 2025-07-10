@@ -241,13 +241,7 @@ export default function About() {
                     alt="Vaibhavamar - Trust Activities and Cultural Heritage"
                     className="w-full h-auto min-h-64 sm:min-h-80 lg:min-h-96 object-contain bg-gradient-to-br from-orange-50 to-white"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-orange-600/30 to-transparent" />
-                  <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 right-3 sm:right-4 text-white">
-                    <div className="bg-black/50 backdrop-blur-sm rounded-lg p-2 sm:p-3">
-                      <p className="text-sm sm:text-base lg:text-lg font-semibold mb-1">Vaibhavamar</p>
-                      <p className="text-xs sm:text-sm text-orange-100">Cultural Heritage and Trust Activities</p>
-                    </div>
-                  </div>
+                 
                 </div>
                 <motion.div
                   animate={{ rotate: 360 }}
