@@ -50,7 +50,7 @@ export default function NewsDetail() {
     };
 
     const openImageInNewTab = (imageUrl) => {
-        window.open(`http://localhost:5000${imageUrl}`, '_blank');
+        window.open(`https://gkptrust.onrender.com${imageUrl}`, '_blank');
     };
 
     // Handle keyboard navigation and touch events
@@ -188,7 +188,7 @@ export default function NewsDetail() {
                                 <div className="mb-6">
                                     <div className="relative group cursor-pointer" onClick={() => openLightbox(selectedImageIndex)}>
                                         <img 
-                                            src={`http://localhost:5000${news.images[selectedImageIndex]}`}
+                                            src={`https://gkptrust.onrender.com${news.images[selectedImageIndex]}`}
                                             alt={`News ${selectedImageIndex + 1}`}
                                             className="w-full h-64 sm:h-96 object-cover rounded-xl shadow-lg transition-transform duration-300 group-hover:scale-105"
                                         />
@@ -232,7 +232,7 @@ export default function NewsDetail() {
                                             {news.images.map((image, index) => (
                                                 <div key={index} className="relative group">
                                                     <img
-                                                        src={`http://localhost:5000${image}`}
+                                                        src={`https://gkptrust.onrender.com${image}`}
                                                         alt={`Thumbnail ${index + 1}`}
                                                         className={`w-full h-24 sm:h-32 object-cover rounded-lg cursor-pointer border-2 transition-all duration-300 ${
                                                             selectedImageIndex === index 
@@ -404,7 +404,7 @@ export default function NewsDetail() {
                         {/* Scrollable image container */}
                         <div className="w-full h-full overflow-auto p-2 sm:p-4 flex items-center justify-center">
                             <img
-                                src={`http://localhost:5000${news.images[lightboxImageIndex]}`}
+                                src={`https://gkptrust.onrender.com${news.images[lightboxImageIndex]}`}
                                 alt={`News image ${lightboxImageIndex + 1}`}
                                 className="max-w-full max-h-full object-contain cursor-pointer transition-transform duration-300"
                                 style={{ 

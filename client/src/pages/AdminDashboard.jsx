@@ -663,7 +663,7 @@ export default function AdminDashboard() {
                           {event.images && event.images.length > 0 && (
                             <div className="mt-2 sm:mt-3">
                               <img
-                                src={`http://localhost:5000${event.images[0]}`}
+                                src={`https://gkptrust.onrender.com${event.images[0]}`}
                                 alt="Event"
                                 className="w-12 h-12 sm:w-16 sm:h-16 object-cover rounded border"
                               />
@@ -823,7 +823,7 @@ export default function AdminDashboard() {
                               {news.images.slice(0, 3).map((image, index) => (
                                 <img
                                   key={index}
-                                  src={`http://localhost:5000${image}`}
+                                  src={`https://gkptrust.onrender.com${image}`}
                                   alt={`Preview ${index + 1}`}
                                   className="w-12 h-12 sm:w-16 sm:h-16 object-cover rounded border flex-shrink-0"
                                 />

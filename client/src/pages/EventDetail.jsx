@@ -84,7 +84,7 @@ export default function EventDetail() {
               {event.images.slice(1).map((image, index) => (
                 <div key={index} className="relative overflow-hidden rounded-lg">
                   <img
-                    src={`${process.env.REACT_APP_API_BASE_URL}${image}`}
+                    src={`"https://gkptrust.onrender.com/"${image}`}
                     alt={`${event.title} - Image ${index + 2}`}
                     className="w-full h-20 sm:h-24 md:h-28 object-cover hover:scale-105 transition-transform duration-300 cursor-pointer"
                     onError={(e) => {

@@ -31,7 +31,7 @@ export default function News(){
     };
 
     const openImageInNewTab = (imageUrl) => {
-        window.open(`http://localhost:5000${imageUrl}`, '_blank');
+        window.open(`https://gkptrust.onrender.com${imageUrl}`, '_blank');
     };
 
     const zoomIn = () => {
@@ -160,7 +160,7 @@ export default function News(){
                         {item.images && item.images.length > 0 && (
                             <div className="relative">
                                 <img 
-                                    src={`http://localhost:5000${item.images[0]}`} 
+                                    src={`https://gkptrust.onrender.com${item.images[0]}`} 
                                     alt="Newspaper" 
                                     className="w-full h-48 sm:h-56 object-cover cursor-pointer"
                                     onClick={() => openNewsModal(item)}
@@ -313,7 +313,7 @@ export default function News(){
                                 }}
                             >
                                 <img 
-                                    src={`http://localhost:5000${selectedNews.images[currentImageIndex]}`}
+                                    src={`https://gkptrust.onrender.com${selectedNews.images[currentImageIndex]}`}
                                     alt={`Newspaper page ${currentImageIndex + 1}`}
                                     className="max-w-none max-h-none object-contain select-none"
                                     style={{
