@@ -1,4 +1,4 @@
-import {useEffect,useState} from 'react';
+import {useEffect,useState,useCallback} from 'react';
 import {getNews} from '../api/news';
 
 export default function News(){
@@ -31,7 +31,7 @@ export default function News(){
     };
 
     const openImageInNewTab = (imageUrl) => {
-        window.open(`https://gkptrust.onrender.com${imageUrl}`, '_blank');
+        window.open(`${process.env.REACT_APP_API_BASE_URL}${imageUrl}`, '_blank');
     };
 
     const zoomIn = () => {
@@ -116,38 +116,73 @@ export default function News(){
             if (selectedNews) {
                 switch(e.key) {
                     case 'Escape':
-                        closeNewsModal();
+                        setSelectedNews(null);
+                        setCurrentImageIndex(0);
+                        setZoomLevel(1);
+                        setPanPosition({ x: 0, y: 0 });
+                        document.body.style.overflow = 'unset';
                         break;
                     case 'ArrowLeft':
-                        prevImage();
+                        if (currentImageIndex > 0) {
+                            setCurrentImageIndex(prev => prev - 1);
+                            setZoomLevel(1);
+                            setPanPosition({ x: 0, y: 0 });
+                        }
                         break;
                     case 'ArrowRight':
-                        nextImage();
+                        if (selectedNews && currentImageIndex < selectedNews.images.length - 1) {
+                            setCurrentImageIndex(prev => prev + 1);
+                            setZoomLevel(1);
+                            setPanPosition({ x: 0, y: 0 });
+                        }
                         break;
                     case '+':
                     case '=':
-                        zoomIn();
+                        setZoomLevel(prev => Math.min(prev + 0.5, 5));
                         break;
                     case '-':
-                        zoomOut();
+                        setZoomLevel(prev => {
+                            const newLevel = Math.max(prev - 0.5, 0.5);
+                            if (newLevel <= 1) {
+                                setPanPosition({ x: 0, y: 0 });
+                            }
+                            return newLevel;
+                        });
                         break;
                     case '0':
-                        resetZoom();
+                        setZoomLevel(1);
+                        setPanPosition({ x: 0, y: 0 });
+                        break;
+                    default:
+                        // Do nothing for other keys
                         break;
                 }
             }
         };
 
+        const handleMouseMoveEvent = (e) => {
+            if (isDragging && zoomLevel > 1) {
+                setPanPosition({
+                    x: e.clientX - dragStart.x,
+                    y: e.clientY - dragStart.y
+                });
+            }
+        };
+
+        const handleMouseUpEvent = () => {
+            setIsDragging(false);
+        };
+
         window.addEventListener('keydown', handleKeyPress);
-        window.addEventListener('mousemove', handleMouseMove);
-        window.addEventListener('mouseup', handleMouseUp);
+        window.addEventListener('mousemove', handleMouseMoveEvent);
+        window.addEventListener('mouseup', handleMouseUpEvent);
 
         return () => {
             window.removeEventListener('keydown', handleKeyPress);
-            window.removeEventListener('mousemove', handleMouseMove);
-            window.removeEventListener('mouseup', handleMouseUp);
+            window.removeEventListener('mousemove', handleMouseMoveEvent);
+            window.removeEventListener('mouseup', handleMouseUpEvent);
         };
-    }, [selectedNews, isDragging, dragStart, panPosition, currentImageIndex, zoomLevel]);
+    }, [selectedNews, isDragging, dragStart, currentImageIndex, zoomLevel]);
 
     return(
         <div className="px-4 py-4 sm:p-6 max-w-6xl mx-auto">
@@ -160,7 +195,7 @@ export default function News(){
                         {item.images && item.images.length > 0 && (
                             <div className="relative">
                                 <img 
-                                    src={`https://gkptrust.onrender.com${item.images[0]}`} 
+                                    src={`${process.env.REACT_APP_API_BASE_URL}${item.images[0]}`} 
                                     alt="Newspaper" 
                                     className="w-full h-48 sm:h-56 object-cover cursor-pointer"
                                     onClick={() => openNewsModal(item)}
@@ -313,7 +348,7 @@ export default function News(){
                                 }}
                             >
                                 <img 
-                                    src={`https://gkptrust.onrender.com${selectedNews.images[currentImageIndex]}`}
+                                    src={`${process.env.REACT_APP_API_BASE_URL}${selectedNews.images[currentImageIndex]}`}
                                     alt={`Newspaper page ${currentImageIndex + 1}`}
                                     className="max-w-none max-h-none object-contain select-none"
                                     style={{

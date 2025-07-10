@@ -1,0 +1,12 @@
+[build]
+  publish = "build"
+  command = "CI=false npm run build"
+
+[build.environment]
+  CI = "false"
+  REACT_APP_API_BASE_URL = "https://gkptrust.onrender.com"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

@@ -127,15 +127,15 @@ export default function Footer() {
               © {new Date().getFullYear()} Gujarat Kalyan Parishad Trust. All rights reserved.
             </p>
             <div className="flex flex-wrap justify-center sm:justify-end space-x-3 sm:space-x-6 text-xs sm:text-sm">
-              <a href="#" className="text-orange-100 hover:text-white transition-colors duration-300">
+              <button className="text-orange-100 hover:text-white transition-colors duration-300">
                 Privacy Policy
-              </a>
-              <a href="#" className="text-orange-100 hover:text-white transition-colors duration-300">
+              </button>
+              <button className="text-orange-100 hover:text-white transition-colors duration-300">
                 Terms of Service
-              </a>
-              <a href="#" className="text-orange-100 hover:text-white transition-colors duration-300">
+              </button>
+              <button className="text-orange-100 hover:text-white transition-colors duration-300">
                 Sitemap
-              </a>
+              </button>
             </div>
           </motion.div>
         </div>
