@@ -18,7 +18,7 @@ export default function Footer() {
         { name: "Donate", path: "/donate" },
         { name: "Contact Us", path: "/contact" },
         { name: "Volunteer", path: "/contact" },
-        { name: "Admin Login", path: "/admin/login" }
+        // { name: "Admin Login", path: "/admin/login" }
       ]
     }
   ];

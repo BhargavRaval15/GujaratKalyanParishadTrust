@@ -38,7 +38,7 @@ export default function Contact() {
             className="rounded-lg shadow w-full"
           />
           <p className="mt-3 sm:mt-4 text-gray-600 text-sm sm:text-base">
-            Office Address:<br />123 Seva Marg, Ahmedabad, Gujarat - 380001<br />Phone: +91 98765 43210
+            Office Address:<br />Surendranagar, Gujarat - 363002<br />Phone: +91 XXXXX XXXXX
           </p>
         </motion.div>
 
